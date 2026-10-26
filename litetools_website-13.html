@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Free browser-based image compressor, image resizer, WebP converter, and basic PDF optimizer. Files are processed on your device.">
+<title>LiteTools — Free Image & PDF Tools</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#182033;--muted:#637087;--accent:#4f46e5;--line:#e1e6ef;--good:#087443}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:linear-gradient(120deg,#171b38,#4541a6);color:#fff;padding:28px 18px 34px} .wrap{max-width:900px;margin:auto} .brand{font-weight:800;font-size:21px;letter-spacing:.2px}h1{font-size:clamp(28px,5vw,42px);line-height:1.12;margin:24px 0 10px}header p{color:#e4e6ff;max-width:650px;margin:0}
+main{padding:22px 14px 40px}.notice{background:#eeefff;border:1px solid #d9dbff;border-radius:12px;padding:12px 14px;margin-bottom:18px;color:#30346d;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 4px 16px #17213b08}
+h2{font-size:19px;margin:0 0 5px}.sub{color:var(--muted);font-size:14px;margin:0 0 16px}.drop{display:block;border:1.5px dashed #b8bfd2;background:#fafbff;border-radius:12px;padding:16px;text-align:center;margin:12px 0;cursor:pointer}.drop input{max-width:100%;display:block;margin:10px auto 0}
+label{display:block;font-weight:650;font-size:14px;margin:12px 0 5px}input[type=number],select{width:100%;border:1px solid #ccd3e0;border-radius:9px;padding:10px;background:white;font:inherit}input[type=range]{width:100%}
+button,.download{display:inline-block;border:0;border-radius:10px;background:var(--accent);color:#fff;font-weight:700;font-size:15px;padding:11px 15px;cursor:pointer;text-decoration:none;margin-top:12px}button:disabled{opacity:.55;cursor:wait}.secondary{background:#e9eafe;color:#30338c}.result{font-size:14px;color:var(--muted);overflow-wrap:anywhere;margin-top:12px;min-height:20px}.ok{color:var(--good);font-weight:650}.small{font-size:12px;color:var(--muted)}footer{padding:20px 16px 36px;text-align:center;color:var(--muted);font-size:13px}footer a{color:inherit;margin:0 7px}.staticpage{margin-top:18px}.staticpage h2{margin-top:14px}.staticpage p{color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="brand">✦ LiteTools</div><h1>Simple file tools.<br>Right in your browser.</h1><p>Compress images, resize pictures, convert to WebP, and optimize PDF files. No account needed.</p></div></header>
+<main class="wrap">
+<div class="notice"><strong>Privacy:</strong> Your selected files are processed in your browser and are not sent to a LiteTools server. Avoid using this demo for highly sensitive files on a shared device.</div>
+<div class="grid">
+<section class="card">
+<h2>Image compressor</h2><p class="sub">Reduce JPG, PNG, or WebP file size.</p>
+<label class="drop">Choose an image<input id="compressFile" type="file" accept="image/jpeg,image/png,image/webp"></label>
+<label for="quality">Output quality: <span id="qval">75%</span></label><input id="quality" type="range" min="20" max="95" value="75">
+<button id="compressBtn">Compress image</button><div id="compressResult" class="result" aria-live="polite"></div>
+</section>
+<section class="card">
+<h2>Image resizer</h2><p class="sub">Change an image's dimensions.</p>
+<label class="drop">Choose an image<input id="resizeFile" type="file" accept="image/*"></label>
+<label for="width">Width (pixels)</label><input id="width" type="number" min="1" max="12000" placeholder="e.g. 1200">
+<label for="height">Height (pixels)</label><input id="height" type="number" min="1" max="12000" placeholder="e.g. 800">
+<label><input id="keepRatio" type="checkbox" checked> Keep aspect ratio</label>
+<button id="resizeBtn">Resize image</button><div id="resizeResult" class="result" aria-live="polite"></div>
+</section>
+<section class="card">
+<h2>Convert image to WebP</h2><p class="sub">Create a smaller WebP image for websites.</p>
+<label class="drop">Choose an image<input id="webpFile" type="file" accept="image/*"></label>
+<label for="webpQuality">Output quality: <span id="wval">80%</span></label><input id="webpQuality" type="range" min="20" max="95" value="80">
+<button id="webpBtn">Convert to WebP</button><div id="webpResult" class="result" aria-live="polite"></div>
+</section>
+<section class="card">
+<h2>Basic PDF optimizer</h2><p class="sub">Re-save a PDF with a compact file structure. This may not reduce scanned PDFs or PDFs containing large images.</p>
+<label class="drop">Choose a PDF<input id="pdfFile" type="file" accept="application/pdf,.pdf"></label>
+<button id="pdfBtn">Optimize PDF</button><div id="pdfResult" class="result" aria-live="polite"></div>
+<p class="small">PDF processing uses the open-source pdf-lib library loaded from a public CDN. An internet connection is needed for the library.</p>
+</section>
+</div>
+<section class="card staticpage">
+<h2>How to use LiteTools</h2><p>Select a file in the relevant tool, adjust the settings if available, then tap the processing button and download the result. Results depend on the original file type and contents.</p>
+<h2>About</h2><p>LiteTools is a simple independent browser-based utility project designed to help people perform common image and document tasks.</p>
+<h2>Privacy policy</h2><p>LiteTools does not intentionally upload your selected files to its own server. Processing takes place in your browser. The website host may collect standard technical logs, and third-party libraries may be downloaded when a tool is used. Do not use this demo for confidential files on a device you do not trust.</p>
+<h2>Contact</h2><p>Before publishing this site for public use, replace this text with a real contact email that you control and provide accurate ownership information.</p>
+</section>
+</main>
+<footer>LiteTools · Free browser tools <br><a href="#top">Back to top</a> · Demo version — test before public launch</footer>
+<script>
+const $=id=>document.getElementById(id);
+const fmt=n=>n<1024?(n+' B'):(n/1024).toFixed(1)+' KB';
+const safeName=n=>n.replace(/\.[^.]+$/,'');
+function say(id,msg,ok=false){$(id).innerHTML=ok?'<span class="ok">'+msg+'</span>':msg}
+function downloadBlob(blob,name){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000)}
+function loadImage(file){return new Promise((resolve,reject)=>{const url=URL.createObjectURL(file),img=new Image();img.onload=()=>{URL.revokeObjectURL(url);resolve(img)};img.onerror=()=>{URL.revokeObjectURL(url);reject(new Error('Could not open this image. Try a JPG or PNG.'))};img.src=url})}
+function canvasBlob(canvas,type,quality){return new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('This image format is not supported by your browser.')),type,quality))}
+function canvasFor(img,w,h){const c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.drawImage(img,0,0,w,h);return c}
+$('quality').oninput=()=> $('qval').textContent=$('quality').value+'%';
+$('webpQuality').oninput=()=> $('wval').textContent=$('webpQuality').value+'%';
+$('compressBtn').onclick=async()=>{const f=$('compressFile').files[0];if(!f)return say('compressResult','Choose an image first.');$('compressBtn').disabled=true;say('compressResult','Working…');try{const img=await loadImage(f),c=canvasFor(img,img.naturalWidth,img.naturalHeight),type='image/jpeg',b=await canvasBlob(c,type,Number($('quality').value)/100);downloadBlob(b,safeName(f.name)+'-compressed.jpg');say('compressResult',`Original: ${fmt(f.size)} · New: ${fmt(b.size)} · ${b.size<f.size?'Saved '+Math.round((1-b.size/f.size)*100)+'%':'The output is not smaller; try a lower quality.'}`,true)}catch(e){say('compressResult',e.message)}finally{$('compressBtn').disabled=false}};
+$('resizeBtn').onclick=async()=>{const f=$('resizeFile').files[0];if(!f)return say('resizeResult','Choose an image first.');let w=Number($('width').value),h=Number($('height').value);if(!w&&!h)return say('resizeResult','Enter a width or height.');$('resizeBtn').disabled=true;say('resizeResult','Working…');try{const img=await loadImage(f);if($('keepRatio').checked){if(w&&!h)h=Math.round(w*img.naturalHeight/img.naturalWidth);else if(h&&!w)w=Math.round(h*img.naturalWidth/img.naturalHeight);else if(w&&h){const ratio=Math.min(w/img.naturalWidth,h/img.naturalHeight);w=Math.round(img.naturalWidth*ratio);h=Math.round(img.naturalHeight*ratio)}}else{w=w||img.naturalWidth;h=h||img.naturalHeight}if(w<1||h<1||w>12000||h>12000)throw new Error('Use dimensions between 1 and 12000 pixels.');const c=canvasFor(img,w,h),type=f.type==='image/png'?'image/png':'image/jpeg',b=await canvasBlob(c,type,.88);downloadBlob(b,safeName(f.name)+'-resized.'+(type==='image/png'?'png':'jpg'));say('resizeResult',`Done: ${w} × ${h} pixels · ${fmt(b.size)}`,true)}catch(e){say('resizeResult',e.message)}finally{$('resizeBtn').disabled=false}};
+$('webpBtn').onclick=async()=>{const f=$('webpFile').files[0];if(!f)return say('webpResult','Choose an image first.');$('webpBtn').disabled=true;say('webpResult','Working…');try{const img=await loadImage(f),c=canvasFor(img,img.naturalWidth,img.naturalHeight),b=await canvasBlob(c,'image/webp',Number($('webpQuality').value)/100);if(b.type!=='image/webp')throw new Error('Your browser could not create WebP. Try a newer browser.');downloadBlob(b,safeName(f.name)+'.webp');say('webpResult',`Original: ${fmt(f.size)} · New: ${fmt(b.size)} · ${b.size<f.size?'Saved '+Math.round((1-b.size/f.size)*100)+'%':'Output is not smaller for this file.'}`,true)}catch(e){say('webpResult',e.message)}finally{$('webpBtn').disabled=false}};
+$('pdfBtn').onclick=async()=>{const f=$('pdfFile').files[0];if(!f)return say('pdfResult','Choose a PDF first.');$('pdfBtn').disabled=true;say('pdfResult','Loading PDF library and processing…');try{if(!window.PDFLib)await new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js';s.onload=resolve;s.onerror=()=>reject(new Error('Could not load the PDF library. Check your internet connection.'));document.head.appendChild(s)});const bytes=await f.arrayBuffer(),doc=await PDFLib.PDFDocument.load(bytes),out=await doc.save({useObjectStreams:true}),blob=new Blob([out],{type:'application/pdf'});downloadBlob(blob,safeName(f.name)+'-optimized.pdf');say('pdfResult',`Original: ${fmt(f.size)} · New: ${fmt(blob.size)} · ${blob.size<f.size?'Saved '+Math.round((1-blob.size/f.size)*100)+'%':'This PDF did not get smaller. This basic optimizer does not recompress embedded images.'}`,true)}catch(e){say('pdfResult','Could not process this PDF. It may be encrypted, damaged, or too large. '+e.message)}finally{$('pdfBtn').disabled=false}};
+</script>
+</body></html>
